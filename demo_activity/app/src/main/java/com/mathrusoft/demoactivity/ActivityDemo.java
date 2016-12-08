@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 /**
@@ -13,6 +14,7 @@ import android.widget.Toast;
 public class ActivityDemo extends Activity {
 
     private Button mButton;
+    private EditText mEditTextName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,8 @@ public class ActivityDemo extends Activity {
         setContentView(R.layout.activity_demo);
 
         mButton = (Button) findViewById(R.id.button_greeting);
+        mEditTextName = (EditText) findViewById(R.id.name);
+
         mButton.setOnClickListener(mOnClickListener);
     }
 
@@ -28,8 +32,12 @@ public class ActivityDemo extends Activity {
     View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+
+            String name = mEditTextName.getText().toString();
+            String message = "Welcome " + name + " to Android Class";
+
             Toast.makeText(ActivityDemo.this.getApplicationContext(),
-                    "Welcome to Android Class",
+                    message,
                     Toast.LENGTH_SHORT).show();
         }
     };

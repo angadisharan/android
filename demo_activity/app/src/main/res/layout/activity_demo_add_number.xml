@@ -4,18 +4,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <EditText
+        android:id="@+id/number_a"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Number A"
+        android:inputType="number" />
 
     <EditText
-        android:id="@+id/name"
+        android:id="@+id/number_b"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Name" />
-
+        android:hint="Number B"
+        android:inputType="number" />
 
     <Button
-        android:id="@+id/button_greeting"
+        android:id="@+id/button_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Greetings" />
+        android:text="Add" />
 
 </LinearLayout>
