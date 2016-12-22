@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/my_action_one"
+        app:icon="@drawable/ic_menu_camera"
+        app:showAsAction="never"
+        android:title="My Action" />
+    <item
+        android:id="@+id/my_action_two"
+        app:icon="@drawable/ic_menu_camera"
+        app:showAsAction="never"
+        android:title="My Action Two" />
+</menu>
