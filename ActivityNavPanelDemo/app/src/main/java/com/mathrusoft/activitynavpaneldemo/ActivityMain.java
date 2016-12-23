@@ -5,25 +5,33 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mathrusoft.activitynavpaneldemo.fragment.FragmentCamera;
+import com.mathrusoft.activitynavpaneldemo.fragment.FragmentGallery;
+import com.mathrusoft.activitynavpaneldemo.fragment.FragmentHome;
+import com.mathrusoft.activitynavpaneldemo.fragment.FragmentSlideShow;
+import com.mathrusoft.activitynavpaneldemo.fragment.FragmentTools;
 
 public class ActivityMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     Context mContext;
 
-    Button mButtonChangeVisibility;
-    TextView mTextViewOne;
-    TextView mTextViewTwo;
+//    Button mButtonChangeVisibility;
+//    TextView mTextViewOne;
+//    TextView mTextViewTwo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +47,20 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(mOnClickListener);
 
 
-        mButtonChangeVisibility = (Button) findViewById(R.id.button_change_visibility);
-        mButtonChangeVisibility.setOnClickListener(mOnClickListener);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+        fragmentTransaction.replace(R.id.fragment_holder, new FragmentHome());
+        fragmentTransaction.commit();
 
-        mTextViewOne = (TextView) findViewById(R.id.text_one);
-        mTextViewTwo = (TextView) findViewById(R.id.text_two);
+        Log.d("MYAPP", " Updated code here ======== ");
+//        System.out.print("dsfa sdf dsafds fd");
+
+//        mButtonChangeVisibility = (Button) findViewById(R.id.button_change_visibility);
+//        mButtonChangeVisibility.setOnClickListener(mOnClickListener);
+//
+//        mTextViewOne = (TextView) findViewById(R.id.text_one);
+//        mTextViewTwo = (TextView) findViewById(R.id.text_two);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -64,9 +80,9 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
                 case R.id.fab:
                     Toast.makeText(mContext, "Fab clicked", Toast.LENGTH_SHORT).show();
                     break;
-                case R.id.button_change_visibility:
-                    changeVisibility();
-                    break;
+//                case R.id.button_change_visibility:
+//                    changeVisibility();
+//                    break;
             }
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                    .setAction("Action", null).show();
@@ -77,8 +93,8 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
 
     private void changeVisibility() {
 
-        mTextViewOne.setVisibility(mTextViewOne.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
-        mTextViewTwo.setVisibility(mTextViewTwo.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+//        mTextViewOne.setVisibility(mTextViewOne.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+//        mTextViewTwo.setVisibility(mTextViewTwo.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
 
 //        if (mTextViewOne.getVisibility() == View.VISIBLE) {
 //            mTextViewOne.setVisibility(View.GONE);
@@ -125,22 +141,25 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
     }
 
     NavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener = new NavigationView.OnNavigationItemSelectedListener() {
+
+
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.nav_camera:
-                    Toast.makeText(mContext, "Camera clicked", Toast.LENGTH_SHORT).show();
+                    replaceFragment(new FragmentCamera());
                     break;
                 case R.id.nav_gallery:
-                    Toast.makeText(mContext, "nav_gallery clicked", Toast.LENGTH_SHORT).show();
+                    replaceFragment(new FragmentGallery());
                     break;
                 case R.id.nav_slideshow:
-                    Toast.makeText(mContext, "nav_slideshow clicked", Toast.LENGTH_SHORT).show();
+                    replaceFragment(new FragmentSlideShow());
                     break;
                 case R.id.nav_manage:
-                    Toast.makeText(mContext, "nav_manage clicked", Toast.LENGTH_SHORT).show();
+                    replaceFragment(new FragmentTools());
                     break;
                 case R.id.nav_share:
+//                    replaceFragment(new FragmentTools());
                     Toast.makeText(mContext, "nav_share clicked", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.nav_send:
@@ -153,6 +172,13 @@ public class ActivityMain extends AppCompatActivity implements NavigationView.On
             return true;
         }
     };
+
+    private void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_holder, fragment);
+        fragmentTransaction.commit();
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

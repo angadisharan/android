@@ -14,22 +14,29 @@
     tools:context="com.mathrusoft.activitynavpaneldemo.ActivityMain"
     tools:showIn="@layout/app_bar_activity_main">
 
-    <TextView
-        android:id="@+id/text_one"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <TextView
-        android:id="@+id/text_two"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Second Text" />
-
-    <Button
-        android:id="@+id/button_change_visibility"
+    <FrameLayout
+        android:id="@+id/fragment_holder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Change Visibility" />
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_one"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Hello World!" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/text_two"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Second Text" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/button_change_visibility"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Change Visibility" />-->
 
 </LinearLayout>
