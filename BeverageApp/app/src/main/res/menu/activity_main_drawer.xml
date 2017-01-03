@@ -9,7 +9,11 @@
         <item
             android:id="@+id/beverage_list"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Beverage_list" />
+            android:title="Beverage List" />
+        <item
+            android:id="@+id/nav_recycler_view_beverage"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Beverage (Recycler View)" />
 
     </group>
 

@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.mathrusoft.beverageapp.fragment.FragmentBeverageList;
+import com.mathrusoft.beverageapp.fragment.FragmentBeverageRecyclerView;
 import com.mathrusoft.beverageapp.fragment.FragmentCreateBeverage;
 
 public class ActivityMain extends AppCompatActivity
@@ -93,6 +94,10 @@ public class ActivityMain extends AppCompatActivity
             case R.id.beverage_list:
                 getSupportActionBar().setTitle("Beverage List");
                 switchFragment(new FragmentBeverageList());
+                break;
+            case R.id.nav_recycler_view_beverage:
+                getSupportActionBar().setTitle("Beverage (Recycler View)");
+                switchFragment(new FragmentBeverageRecyclerView());
                 break;
         }
 
