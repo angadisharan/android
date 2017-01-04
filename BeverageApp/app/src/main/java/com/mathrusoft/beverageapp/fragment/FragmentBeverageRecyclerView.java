@@ -54,7 +54,7 @@ public class FragmentBeverageRecyclerView extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        mAdapterBeverageRecyclerView = new AdapterBeverageRecyclerView(mList);
+        mAdapterBeverageRecyclerView = new AdapterBeverageRecyclerView(mContext, mList);
 
         mRecyclerView.setAdapter(mAdapterBeverageRecyclerView);
         getDataFromDB();
