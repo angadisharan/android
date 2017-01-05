@@ -28,4 +28,12 @@ public class DataSource {
         return mySQLiteHelper.getAllBeverages();
     }
 
+    public long updateBeverageModel(ModelBeverage modelBeverage) {
+        return mySQLiteHelper.updateBeverageModel(modelBeverage);
+    }
+
+    public void deleteBeverage(ModelBeverage modelBeverage) {
+        mySQLiteHelper.deleteBeverage(modelBeverage);
+    }
+
 }

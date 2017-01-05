@@ -2,15 +2,14 @@ package com.mathrusoft.beverageapp.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mathrusoft.beverageapp.R;
+import com.mathrusoft.beverageapp.callback.CallbackItemEdit;
 import com.mathrusoft.beverageapp.model.ModelBeverage;
 
 import java.util.List;
@@ -31,6 +30,13 @@ public class AdapterBeverageRecyclerView extends RecyclerView.Adapter<AdapterBev
         mList = list;
     }
 
+    CallbackItemEdit mCallbackItemEdit;
+
+    public void setEditCallback(CallbackItemEdit editCallback) {
+        mCallbackItemEdit = editCallback;
+    }
+
+
     @Override
     public int getItemCount() {
         return mList.size();
@@ -45,7 +51,7 @@ public class AdapterBeverageRecyclerView extends RecyclerView.Adapter<AdapterBev
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         ModelBeverage modelBeverage = mList.get(holder.getAdapterPosition());
 
         holder.mName.setText(modelBeverage.getName() + "");
@@ -57,10 +63,10 @@ public class AdapterBeverageRecyclerView extends RecyclerView.Adapter<AdapterBev
             public void onClick(View view) {
                 switch (view.getId()) {
                     case R.id.edit:
-                        Toast.makeText(mContext, "Edit Clicked ", Toast.LENGTH_SHORT).show();
+                        mCallbackItemEdit.doEdit(holder.getAdapterPosition());
                         break;
                     case R.id.delete:
-                        Toast.makeText(mContext, "Delete Clicked ", Toast.LENGTH_SHORT).show();
+                        mCallbackItemEdit.doDelete(holder.getAdapterPosition());
                         break;
                 }
             }

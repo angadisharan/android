@@ -77,6 +77,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 cursor.moveToPosition(-1);
                 while (cursor.moveToNext()) {
                     ModelBeverage modelBeverage = new ModelBeverage();
+                    modelBeverage.set_id(cursor.getInt(cursor.getColumnIndex("_id")) + "");
                     modelBeverage.setName(cursor.getString(cursor.getColumnIndex("name")));
                     modelBeverage.setDescription(cursor.getString(cursor.getColumnIndex("description")));
                     modelBeverage.setPrice(cursor.getFloat(cursor.getColumnIndex("price")));
@@ -86,6 +87,28 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             }
         }
         return list;
+    }
+
+    public long updateBeverageModel(ModelBeverage modelBeverage) {
+        SQLiteDatabase database = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", modelBeverage.getName());
+        contentValues.put("price", modelBeverage.getPrice());
+        contentValues.put("description", modelBeverage.getDescription());
+
+
+        long returnId = database.update(TABLE_BEVERAGE, contentValues, "_id = ? ", new String[]{modelBeverage.get_id()});
+
+        database.close();
+        return returnId;
+    }
+
+    public void deleteBeverage(ModelBeverage modelBeverage) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        String sql = " delete from " + TABLE_BEVERAGE + " where _id = " + modelBeverage.get_id() + "; ";
+        database.execSQL(sql);
+        database.close();
     }
 
 
