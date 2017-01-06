@@ -1,14 +1,17 @@
 package com.mathrusoft.beverageapp.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.mathrusoft.beverageapp.ActivityBeverageDetails;
 import com.mathrusoft.beverageapp.R;
 import com.mathrusoft.beverageapp.adapter.AdapterBeverageList;
 import com.mathrusoft.beverageapp.database.DataSource;
@@ -48,6 +51,14 @@ public class FragmentBeverageList extends Fragment {
 
     private void initViews(View view) {
         mListView = (ListView) view.findViewById(R.id.list_beverage);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(), ActivityBeverageDetails.class);
+                getActivity().startActivity(intent);
+            }
+        });
 
         mAdapterBeverageList = new AdapterBeverageList(mContext, -1, mListModelBeverage);
         mListView.setAdapter(mAdapterBeverageList);

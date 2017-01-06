@@ -5,4 +5,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+
+    <string name="details">Details</string>
+    <string name="rating">Rating</string>
+    <string name="restaurant_location">Restaurant Location</string>
 </resources>
