@@ -54,8 +54,10 @@ public class FragmentBeverageList extends Fragment {
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent intent = new Intent(getActivity(), ActivityBeverageDetails.class);
+                ModelBeverage modelBeverage = mListModelBeverage.get(position);
+                intent.putExtra(ActivityBeverageDetails.KEY_DATA, modelBeverage);
                 getActivity().startActivity(intent);
             }
         });
