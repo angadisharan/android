@@ -1,5 +1,11 @@
 package com.mathrusoft.beverageapp;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.media.RingtoneManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -23,11 +29,14 @@ import com.mathrusoft.beverageapp.fragment.FragmentCreateBeverage;
 public class ActivityMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mContext = this.getApplicationContext();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -49,6 +58,40 @@ public class ActivityMain extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        showNotification();
+
+
+    }
+
+    private void showNotification() {
+
+
+        Intent actionContentIntent = new Intent(mContext, ActivityMain.class);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 123, actionContentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        Intent intentActionOne = new Intent(mContext, ActivityActionOne.class);
+        PendingIntent pendingIntentActionOne = PendingIntent.getActivity(this, 1212, intentActionOne, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Notification notification = new android.support.v7.app.NotificationCompat.Builder(mContext)
+                .setVisibility(android.support.v7.app.NotificationCompat.VISIBILITY_PUBLIC)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentIntent(pendingIntent) // #3
+                .setContentTitle("Title here ")
+                .setContentText("Notification message here ")
+                .setAutoCancel(true)
+                .addAction(R.drawable.ic_menu_camera, "Action One", pendingIntentActionOne)
+                .addAction(R.drawable.ic_menu_camera, "dummy action", pendingIntentActionOne)
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                .build();
+
+            NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.notify(211, notification);
+
+
     }
 
     @Override

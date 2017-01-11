@@ -20,6 +20,7 @@
         </activity>
 
         <activity android:name=".ActivityBeverageDetails" />
+        <activity android:name=".ActivityActionOne" />
     </application>
 
 </manifest>
