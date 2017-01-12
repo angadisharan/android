@@ -21,6 +21,9 @@
 
         <activity android:name=".ActivityBeverageDetails" />
         <activity android:name=".ActivityActionOne" />
+
+        <service android:name=".service.DemoService" />
+        <service android:name=".service.DemoIntentService" />
     </application>
 
 </manifest>

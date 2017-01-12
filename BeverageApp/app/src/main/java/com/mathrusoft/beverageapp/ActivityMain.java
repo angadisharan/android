@@ -25,6 +25,7 @@ import android.view.View;
 import com.mathrusoft.beverageapp.fragment.FragmentBeverageList;
 import com.mathrusoft.beverageapp.fragment.FragmentBeverageRecyclerView;
 import com.mathrusoft.beverageapp.fragment.FragmentCreateBeverage;
+import com.mathrusoft.beverageapp.service.DemoService;
 
 public class ActivityMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -62,7 +63,8 @@ public class ActivityMain extends AppCompatActivity
 
         showNotification();
 
-
+        Intent intent = new Intent(mContext, DemoService.class);
+        startService(intent);
     }
 
     private void showNotification() {
