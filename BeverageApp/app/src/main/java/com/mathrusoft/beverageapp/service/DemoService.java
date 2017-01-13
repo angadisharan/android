@@ -25,6 +25,7 @@ public class DemoService extends Service {
         return START_STICKY;
     }
 
+
     @Override
     public void onDestroy() {
         super.onDestroy();

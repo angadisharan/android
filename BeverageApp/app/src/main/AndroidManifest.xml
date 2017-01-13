@@ -24,6 +24,7 @@
 
         <service android:name=".service.DemoService" />
         <service android:name=".service.DemoIntentService" />
+        <service android:name=".service.DemoBoundService" />
     </application>
 
 </manifest>
