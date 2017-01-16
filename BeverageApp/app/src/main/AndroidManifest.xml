@@ -25,6 +25,22 @@
         <service android:name=".service.DemoService" />
         <service android:name=".service.DemoIntentService" />
         <service android:name=".service.DemoBoundService" />
+
+        <receiver android:name=".receiver.ConnectionChangeReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".receiver.CustomReceiver">
+            <intent-filter>
+                <action android:name="com.mathrusoft.beverageapp.Mathrusoft"/>
+            </intent-filter>
+        </receiver>
+
+
+
     </application>
 
 </manifest>

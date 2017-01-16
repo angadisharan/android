@@ -60,11 +60,18 @@ public class ActivityMain extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        sendCustomBroadcast();
 
-        showNotification();
+//        showNotification();
 
         Intent intent = new Intent(mContext, DemoService.class);
         startService(intent);
+    }
+
+    private void sendCustomBroadcast() {
+        Intent intent = new Intent();
+        intent.setAction("com.mathrusoft.beverageapp.Mathrusoft");
+        sendBroadcast(intent);
     }
 
     private void showNotification() {
@@ -90,8 +97,8 @@ public class ActivityMain extends AppCompatActivity
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .build();
 
-            NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(NOTIFICATION_SERVICE);
-            notificationManager.notify(211, notification);
+        NotificationManager notificationManager = (NotificationManager) mContext.getSystemService(NOTIFICATION_SERVICE);
+        notificationManager.notify(211, notification);
 
 
     }

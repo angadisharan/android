@@ -27,7 +27,7 @@ public class DemoBoundService extends Service {
         for (int i = 0; i < 10; i++) {
             Log.d("MYAPP", "inside service LOOP " + i);
         }
-        return super.onStartCommand(intent, flags, startId);
+        return START_STICKY;
     }
 
 
