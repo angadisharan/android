@@ -18,14 +18,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.mathrusoft.beverageapp.fragment.FragmentBeverageList;
 import com.mathrusoft.beverageapp.fragment.FragmentBeverageRecyclerView;
 import com.mathrusoft.beverageapp.fragment.FragmentCreateBeverage;
-import com.mathrusoft.beverageapp.service.DemoService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ActivityMain extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -64,9 +72,52 @@ public class ActivityMain extends AppCompatActivity
 
 //        showNotification();
 
-        Intent intent = new Intent(mContext, DemoService.class);
-        startService(intent);
+//        Intent intent = new Intent(mContext, DemoService.class);
+//        startService(intent);
+
+        demoRequest();
+
     }
+
+    private void demoRequest() {
+        String url = "http://location.mathrusoft.com:4002/test/login";
+
+        StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST,
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("MYAPP", " ====== response ===== " + response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("MYAPP", " ====== VolleyError ===== " + error.getMessage());
+                        Log.e("MYAPP", "VolleyError", error);
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> mHeaders = new HashMap<>();
+                mHeaders.put("Content-Type", "application/json");
+                return mHeaders;
+            }
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+
+                String body = "{ " +
+                        "\"user_name\":\"a\"," +
+                        "\"password\":\"a\"" +
+                        "} ";
+                return body.getBytes();
+            }
+        };
+
+        AppControl.getInstance().getRequestQueue().add(jsonObjectRequest);
+    }
+
 
     private void sendCustomBroadcast() {
         Intent intent = new Intent();
