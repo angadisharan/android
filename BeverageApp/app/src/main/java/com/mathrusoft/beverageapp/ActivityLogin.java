@@ -1,12 +1,15 @@
 package com.mathrusoft.beverageapp;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +25,7 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +54,25 @@ public class ActivityLogin extends AppCompatActivity {
         mButtonSubmit = (Button) findViewById(R.id.button_login);
         mTextViewStatus = (TextView) findViewById(R.id.status);
         mButtonSubmit.setOnClickListener(mOnClickListener);
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        playSongFromAsset();
+
+    }
+
+    private void playSongFromAsset() {
+
+        try {
+            AssetFileDescriptor afd = getAssets().openFd("3_peg_.mp3");
+            MediaPlayer player = new MediaPlayer();
+            player.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            player.prepare();
+            player.start();
+        } catch (IOException e) {
+            Log.e("MYAPP", "Exception ", e);
+        }
     }
 
 
@@ -140,4 +163,16 @@ public class ActivityLogin extends AppCompatActivity {
         AppControl.getInstance().getRequestQueue().add(stringRequest);
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
